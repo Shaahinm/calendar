@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Shaahinm/calendar/api/middlewares"
 	"github.com/Shaahinm/calendar/api/routes"
 	"github.com/Shaahinm/calendar/config"
 	"github.com/gorilla/mux"
@@ -21,6 +22,7 @@ func NewApiServer(addr string) *ApiServer {
 func (s *ApiServer) Start() error {
 	router := mux.NewRouter()
 	routes.RegisterTodoRoutes(router)
+	middlewares.RegisterMiddleware(router)
 
 	connection := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
 	srv := &http.Server{
@@ -31,3 +33,7 @@ func (s *ApiServer) Start() error {
 	}
 	return srv.ListenAndServe()
 }
+
+// func registerMiddleware(router *mux.Router) {
+// 	router.Use(mi .loggingMiddleware)
+// }

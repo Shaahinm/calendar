@@ -6,7 +6,6 @@ import (
 
 	"github.com/Shaahinm/calendar/internal/db/models"
 	"github.com/Shaahinm/calendar/pkg/service"
-	"github.com/gorilla/mux"
 	"go.opentelemetry.io/otel"
 )
 
@@ -18,14 +17,14 @@ func HandleGetTodos(w http.ResponseWriter, r *http.Request) {
 	defer span.End()
 	println(tracer)
 
-	vars := mux.Vars(r)
+	// vars := mux.Vars(r)
 
-	todoService := service.NewService[models.Todo]()
-	todo := models.Todo{Title: vars["category"], Description: "description"}
-	t := todoService.Repository().Create(todo)
+	// todoService := service.NewService[models.Todo]()
+	// todo := models.Todo{Title: vars["category"], Description: "description"}
+	// t := todoService.Repository().Create(todo)
 
-	result := Result{&w}
-	result.ok(t)
+	// result := Result{&w}
+	// result.ok(t)
 }
 
 type Result struct {
