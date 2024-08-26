@@ -2,7 +2,6 @@ package config
 
 import (
 	"fmt"
-	"strings"
 
 	"gorm.io/driver/mysql"
 
@@ -49,26 +48,14 @@ func connectToDatabase() {
 }
 
 func newPostgresConnection() (*gorm.DB, error) {
-	db, err := gorm.Open(postgres.Open("test.db"), &gorm.Config{})
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai", Envs.DbHost, Envs.DbUser, Envs.DbPass, Envs.DbName, Envs.DbPort)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	return db, err
 }
 
 func newMysqlConnection() (*gorm.DB, error) {
 	// dsn := "root:@tcp(127.0.0.1:3306)/bookstore?charset=utf8mb4&parseTime=True&loc=Local"
-	builder := strings.Builder{}
-	builder.WriteString(Envs.DbUser)
-	builder.WriteString(":")
-	builder.WriteString("@tcp(")
-	builder.WriteString(Envs.DbHost)
-	builder.WriteString(":")
-	builder.WriteString(Envs.DbPort)
-	builder.WriteString(")/")
-	builder.WriteString(Envs.DbName)
-	builder.WriteString("?charset=utf8mb4&parseTime=True&loc=Local")
-
-	dsn := builder.String()
-	fmt.Println(dsn)
-
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", Envs.DbUser, Envs.DbPass, Envs.DbHost, Envs.DbPort, Envs.DbName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	return db, err
 }
