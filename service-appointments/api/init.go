@@ -1,15 +1,20 @@
 package api
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/Shaahinm/calendar/api/routes"
 	"github.com/gorilla/mux"
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 
 func Init() {
+	http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Hello, OpenTelemetry!")
+	}), "/"))
 	r := mux.NewRouter()
 	routes.RegisterTodoRoutes(r)
 
