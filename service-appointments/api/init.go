@@ -31,20 +31,3 @@ func (s *ApiServer) Start() error {
 	}
 	return srv.ListenAndServe()
 }
-
-// func Init() {
-// 	http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		fmt.Fprint(w, "Hello, OpenTelemetry!")
-// 	}), "/"))
-// 	r := mux.NewRouter()
-// 	routes.RegisterTodoRoutes(r)
-//
-// 	srv := &http.Server{
-// 		Handler:      r,
-// 		Addr:         config.Envs.ServerName + ":" + config.Envs.Port,
-// 		WriteTimeout: 15 * time.Second,
-// 		ReadTimeout:  15 * time.Second,
-// 	}
-//
-// 	log.Fatal(srv.ListenAndServe())
-// }

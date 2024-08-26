@@ -6,22 +6,19 @@ import (
 
 	"github.com/Shaahinm/calendar/api"
 	"github.com/Shaahinm/calendar/config"
-	"github.com/Shaahinm/calendar/internal/db"
 )
 
 func main() {
-	//config.ConnectToDatabase()
+	//db.Up(false)
+	//InitOtl()
+	startServer()
+	fmt.Println("Application started")
+}
 
-	db.Up(false)
-	InitOtl()
-
+func startServer() {
 	baseUrl := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
 	server := api.NewApiServer(baseUrl)
 	if err := server.Start(); err != nil {
 		log.Fatal(err)
 	}
-	// db.Up()
-	// api.Init()
-	// InitOtl()
-	fmt.Println("Application started")
 }

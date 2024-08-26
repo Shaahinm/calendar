@@ -10,15 +10,15 @@ type Repository[T any] struct {
 }
 
 func NewRepository[T any]() *Repository[T] {
-	config.ConnectToDatabase()
 	db := config.DB()
 	return &Repository[T]{
 		db: db,
 	}
 }
 
-func (r *Repository[T]) Create(model T) {
+func (r *Repository[T]) Create(model T) T {
 	r.db.Create(&model)
+	return model
 }
 
 func (r *Repository[T]) GetDb() *gorm.DB {

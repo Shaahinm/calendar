@@ -14,10 +14,13 @@ import (
 var db *gorm.DB
 
 func DB() *gorm.DB {
+	if db == nil {
+		connectToDatabase()
+	}
 	return db
 }
 
-func ConnectToDatabase() {
+func connectToDatabase() {
 	dbType := Envs.DbType
 
 	switch dbType {
@@ -71,6 +74,6 @@ func newMysqlConnection() (*gorm.DB, error) {
 }
 
 func newSqliteConnection() (*gorm.DB, error) {
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(Envs.DbName), &gorm.Config{})
 	return db, err
 }
