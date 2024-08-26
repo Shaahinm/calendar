@@ -1,7 +1,11 @@
 package config
 
 import (
+	"fmt"
+	"strings"
+
 	"gorm.io/driver/mysql"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -13,29 +17,29 @@ func GetDB() *gorm.DB {
 	return db
 }
 
-func connect() {
+func ConnectToDatabase() {
 	dbType := Envs.DbType
 
 	switch dbType {
 	case "sqlite":
-		db, err := newSqlliteConnection()
+		d, err := newSqlliteConnection()
 		if err != nil {
 			panic("failed to connect database")
 		}
 
-		db = db
+		db = d
 	case "mysql":
-		db, err := newMysqlConnection()
+		d, err := newMysqlConnection()
 		if err != nil {
 			panic("failed to connect database")
 		}
-		db = db
+		db = d
 	case "postgres":
-		db, err := newPostgresConnection()
+		d, err := newPostgresConnection()
 		if err != nil {
 			panic("failed to connect database")
 		}
-		db = db
+		db = d
 	default:
 		panic("Database type not supported")
 	}
@@ -47,7 +51,22 @@ func newPostgresConnection() (*gorm.DB, error) {
 }
 
 func newMysqlConnection() (*gorm.DB, error) {
-	db, err := gorm.Open(mysql.Open("test.db"), &gorm.Config{})
+	// dsn := "root:@tcp(127.0.0.1:3306)/bookstore?charset=utf8mb4&parseTime=True&loc=Local"
+	builder := strings.Builder{}
+	builder.WriteString(Envs.DbUser)
+	builder.WriteString(":")
+	builder.WriteString("@tcp(")
+	builder.WriteString(Envs.DbHost)
+	builder.WriteString(":")
+	builder.WriteString(Envs.DbPort)
+	builder.WriteString(")/")
+	builder.WriteString(Envs.DbName)
+	builder.WriteString("?charset=utf8mb4&parseTime=True&loc=Local")
+
+	dsn := builder.String()
+	fmt.Println(dsn)
+
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	return db, err
 }
 
