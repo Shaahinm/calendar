@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"gorm.io/driver/sqlite"
+	"github.com/Shaahinm/calendar/config"
 	"gorm.io/gorm"
 )
 
@@ -10,12 +10,7 @@ type Repository[T any] struct {
 }
 
 func NewRepository[T any]() *Repository[T] {
-	// TODO: to read the db name from config/env
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-	if err != nil {
-		// TODO: to read from resource file
-		panic("failed to connect database")
-	}
+	db := config.GetDB()
 
 	return &Repository[T]{
 		db: db,
