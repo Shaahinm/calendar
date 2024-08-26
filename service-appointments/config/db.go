@@ -22,7 +22,7 @@ func ConnectToDatabase() {
 
 	switch dbType {
 	case "sqlite":
-		d, err := newSqlliteConnection()
+		d, err := newSqliteConnection()
 		if err != nil {
 			panic("failed to connect database")
 		}
@@ -70,7 +70,7 @@ func newMysqlConnection() (*gorm.DB, error) {
 	return db, err
 }
 
-func newSqlliteConnection() (*gorm.DB, error) {
+func newSqliteConnection() (*gorm.DB, error) {
 	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	return db, err
 }
