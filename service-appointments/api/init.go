@@ -8,7 +8,6 @@ import (
 	"github.com/Shaahinm/calendar/api/routes"
 	"github.com/Shaahinm/calendar/config"
 	"github.com/gorilla/mux"
-	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"gorm.io/gorm"
 )
 
@@ -23,14 +22,12 @@ func NewApiServer(addr string, db *gorm.DB) *ApiServer {
 
 func (s *ApiServer) Start() error {
 	router := mux.NewRouter()
-	http.Handle("/", otelhttp.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello, OpenTelemetry!")
-	}), "/"))
 	routes.RegisterTodoRoutes(router)
 
+	connection := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
 	srv := &http.Server{
 		Handler:      router,
-		Addr:         config.Envs.ServerName + ":" + config.Envs.Port,
+		Addr:         connection,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
