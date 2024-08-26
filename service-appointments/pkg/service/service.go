@@ -1,8 +1,6 @@
-package pkg
+package service
 
-import (
-	repository "github.com/Shaahinm/calendar/pkg/repository"
-)
+import "github.com/Shaahinm/calendar/pkg/repository"
 
 func NewService[T any]() *Service[T] {
 	repository := *repository.NewRepository[T]()

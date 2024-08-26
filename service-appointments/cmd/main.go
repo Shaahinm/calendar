@@ -4,11 +4,11 @@ import (
 	"fmt"
 
 	"github.com/Shaahinm/calendar/api"
-	internal "github.com/Shaahinm/calendar/internal/db"
+	"github.com/Shaahinm/calendar/internal/db"
 )
 
 func main() {
-	internal.Up()
+	db.Up()
 	api.Init()
 	fmt.Println("Application started")
 }
