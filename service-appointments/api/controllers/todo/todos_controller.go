@@ -9,9 +9,10 @@ import (
 )
 
 func HandleGetTodos(w http.ResponseWriter, r *http.Request) {
-	tracer := otel.GetTracerProvider().Tracer("example")
-	_, span := tracer.Start(r.Context(), "my-operation")
+	tracer := otel.GetTracerProvider().Tracer("service-appointments")
+	_, span := tracer.Start(r.Context(), "getTodos")
 	defer span.End()
+	println(tracer)
 
 	vars := mux.Vars(r)
 	w.WriteHeader(http.StatusOK)

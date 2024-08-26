@@ -40,7 +40,7 @@ func InitOtl() {
 	if err != nil {
 		fmt.Println(err, "Failed to create the collector metric exporter")
 	}
-
+	exporter, err := otlptracegrpc.New(ctx)
 	res, err := resource.New(ctx,
 		resource.WithFromEnv(),
 		resource.WithProcess(),
@@ -77,10 +77,12 @@ func InitOtl() {
 
 	tracerProvider := sdktrace.NewTracerProvider(
 		sdktrace.WithSampler(sdktrace.AlwaysSample()),
+		sdktrace.WithBatcher(exporter),
 		sdktrace.WithResource(res),
 		sdktrace.WithSpanProcessor(bsp),
 	)
 
 	otel.SetTracerProvider(tracerProvider)
 	otel.SetTextMapPropagator(propagation.TraceContext{})
+	println("OpenTelemetry initialized")
 }

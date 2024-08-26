@@ -9,7 +9,7 @@ import (
 
 func main() {
 	db.Up()
-	api.Init()
 	InitOtl()
+	api.Init()
 	fmt.Println("Application started")
 }
