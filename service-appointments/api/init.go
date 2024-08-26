@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"time"
 
-	todo "github.com/Shaahinm/calendar/api/controllers/todo"
+	"github.com/Shaahinm/calendar/api/routes"
 	"github.com/gorilla/mux"
 )
 
 func Init() {
 	r := mux.NewRouter()
-	r.HandleFunc("/todos/{category}", todo.HandleGetTodos).Methods("GET")
+	routes.RegisterTodoRoutes(r)
 
 	srv := &http.Server{
 		Handler:      r,
