@@ -6,5 +6,6 @@ import (
 )
 
 func RegisterTodoRoutes(r *mux.Router) {
-	r.HandleFunc("/todos/{category}", controllers.HandleGetTodos).Methods("GET")
+	r.HandleFunc("/todos/{category:[0-9]+}", controllers.HandleGetTodos).Methods("GET")
+	r.HandleFunc("/todos", controllers.HandleCreateTodo).Methods("POST")
 }

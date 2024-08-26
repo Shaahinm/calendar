@@ -2,16 +2,17 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/Shaahinm/calendar/internal/db/models"
 	"github.com/Shaahinm/calendar/pkg/service"
+	"github.com/go-playground/validator/v10"
+
 	"go.opentelemetry.io/otel"
 )
 
 func HandleGetTodos(w http.ResponseWriter, r *http.Request) {
-	// TODO: to add to middleware
-	// input validation
 	tracer := otel.GetTracerProvider().Tracer("service-appointments")
 	_, span := tracer.Start(r.Context(), "getTodos")
 	defer span.End()
@@ -25,6 +26,30 @@ func HandleGetTodos(w http.ResponseWriter, r *http.Request) {
 
 	// result := Result{&w}
 	// result.ok(t)
+	//
+
+	result := Result{&w}
+	result.ok("Hello")
+}
+
+func HandleCreateTodo(w http.ResponseWriter, r *http.Request) {
+	var todo models.Todo
+	err := json.NewDecoder(r.Body).Decode(&todo)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	validate := validator.New()
+	err = validate.Struct(todo)
+	if err != nil {
+		errors := err.(validator.ValidationErrors)
+		http.Error(w, fmt.Sprintf("Validation error: %s", errors), http.StatusBadRequest)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Todo created successfully!")
 }
 
 type Result struct {
