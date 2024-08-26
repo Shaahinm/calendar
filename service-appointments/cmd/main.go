@@ -16,7 +16,8 @@ func main() {
 	db.Up(false)
 	InitOtl()
 
-	server := api.NewApiServer(config.Envs.ServerName+":"+config.Envs.Port, database)
+	connectionString := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
+	server := api.NewApiServer(connectionString, database)
 	if err := server.Start(); err != nil {
 		log.Fatal(err)
 	}
