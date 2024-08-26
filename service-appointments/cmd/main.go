@@ -10,14 +10,13 @@ import (
 )
 
 func main() {
-	config.ConnectToDatabase()
-	database := config.GetDB()
+	//config.ConnectToDatabase()
 
 	db.Up(false)
 	InitOtl()
 
-	connectionString := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
-	server := api.NewApiServer(connectionString, database)
+	baseUrl := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)
+	server := api.NewApiServer(baseUrl)
 	if err := server.Start(); err != nil {
 		log.Fatal(err)
 	}

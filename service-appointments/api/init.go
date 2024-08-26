@@ -8,16 +8,14 @@ import (
 	"github.com/Shaahinm/calendar/api/routes"
 	"github.com/Shaahinm/calendar/config"
 	"github.com/gorilla/mux"
-	"gorm.io/gorm"
 )
 
 type ApiServer struct {
 	addr string
-	db   *gorm.DB
 }
 
-func NewApiServer(addr string, db *gorm.DB) *ApiServer {
-	return &ApiServer{addr: addr, db: db}
+func NewApiServer(addr string) *ApiServer {
+	return &ApiServer{addr: addr}
 }
 
 func (s *ApiServer) Start() error {

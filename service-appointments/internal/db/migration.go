@@ -11,7 +11,7 @@ import (
 // alias internal "github.com/Shaahinm/calendar/internal/db/model"
 
 func Up(seed bool) {
-	db := config.GetDB()
+	db := config.DB()
 	db.AutoMigrate(&models.Todo{})
 
 	if seed {

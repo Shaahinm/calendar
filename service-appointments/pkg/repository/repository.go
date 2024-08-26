@@ -10,8 +10,8 @@ type Repository[T any] struct {
 }
 
 func NewRepository[T any]() *Repository[T] {
-	db := config.GetDB()
-
+	config.ConnectToDatabase()
+	db := config.DB()
 	return &Repository[T]{
 		db: db,
 	}
