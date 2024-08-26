@@ -3,30 +3,33 @@ package config
 import (
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	Port      string
-	DbName    string
-	DbAddress string
-	DbUser    string
-	DbPass    string
+	Port       string
+	DbName     string
+	DbAddress  string
+	DbUser     string
+	DbPass     string
+	ServerName string
+	DbType     string
 }
 
 var Envs = initConfig()
 
 func initConfig() Config {
-	// we can use the following line to read env vars from a file, but they won't be typed
-	// we have to access them using string keys
-	// godotenv.Load()
-	//
+	godotenv.Load()
 
 	return Config{
-		Port:      getEnv("PORT", "8080"),
-		DbName:    getEnv("DB_NAME", "test.db"),
-		DbAddress: getEnv("DB_ADDRESS", "localhost"),
-		DbUser:    getEnv("DB_USER", "root"),
-		DbPass:    getEnv("DB_PASS", "root"),
+		Port:       getEnv("PORT", "8080"),
+		DbName:     getEnv("DB_NAME", "test.db"),
+		DbAddress:  getEnv("DB_ADDRESS", "localhost"),
+		DbUser:     getEnv("DB_USER", "root"),
+		DbPass:     getEnv("DB_PASS", "root"),
+		ServerName: getEnv("SERVER_NAME", "localhost"),
+		DbType:     getEnv("DB_TYPE", "sqlite"),
 	}
 }
 

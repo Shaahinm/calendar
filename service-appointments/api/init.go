@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/Shaahinm/calendar/api/routes"
+	"github.com/Shaahinm/calendar/config"
 	"github.com/gorilla/mux"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
@@ -17,10 +18,12 @@ func Init() {
 	}), "/"))
 	r := mux.NewRouter()
 	routes.RegisterTodoRoutes(r)
+	test := config.Envs.ServerName
+	println(test)
 
 	srv := &http.Server{
 		Handler:      r,
-		Addr:         "127.0.0.1:8000",
+		Addr:         config.Envs.ServerName + ":" + config.Envs.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
