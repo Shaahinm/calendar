@@ -2,7 +2,7 @@ package db
 
 import (
 	"github.com/Shaahinm/calendar/internal/db/models"
-	"github.com/Shaahinm/calendar/pkg/service"
+	// "github.com/Shaahinm/calendar/pkg/service"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -17,6 +17,6 @@ func Up() {
 	db.AutoMigrate(&models.Todo{})
 
 	// test the service
-	todoService := service.NewService[models.Todo]()
-	todoService.Create(models.Todo{Title: "First todo", Description: "description"})
+	// todoService := service.NewService[models.Todo]()
+	// todoService.Create(models.Todo{Title: "First todo", Description: "description"})
 }
