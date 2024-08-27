@@ -17,6 +17,7 @@ type Config struct {
 	ServerName      string
 	DbType          string
 	ResponseVersion int
+	UserLang        string
 }
 
 var Envs = initConfig()
@@ -33,6 +34,7 @@ func initConfig() Config {
 		DbPass:          getEnv("DB_PASS", "root"),
 		ServerName:      getEnv("SERVER_NAME", "127.0.0.1"),
 		DbType:          getEnv("DB_TYPE", "sqlite"),
+		UserLang:        getEnv("USER_LANG", "en"),
 		ResponseVersion: int(getEnvAsInt("RESPONSE_VERSION", 1)),
 	}
 }

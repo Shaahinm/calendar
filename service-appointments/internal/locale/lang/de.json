@@ -1,0 +1,4 @@
+{
+  "helloWorld": "Hallo Welt!",
+  "test": "Dies ist ein Test {{.Name}}"
+}
