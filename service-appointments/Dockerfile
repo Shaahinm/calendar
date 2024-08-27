@@ -11,7 +11,7 @@ WORKDIR /app
 #COPY go.mod go.sum ./
 COPY . .
 RUN go mod download
-RUN pwd
+#RUN pwd
 
 # Build
 WORKDIR /app/cmd

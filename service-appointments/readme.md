@@ -28,6 +28,8 @@ go mod tidy
 
 # Dockerfile
 
+# Wrapper (HttpClient) for API call
+
 go get go.opentelemetry.io/otel
 go get go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
 go get go.opentelemetry.io/otel/sdk/resource
