@@ -1,11 +1,7 @@
 package models
 
-import (
-	"gorm.io/gorm"
-)
-
 type Todo struct {
-	gorm.Model
+	BaseModel
 	Title       string `json:"title" validate:"required,min=3,max=100"`
 	Description string `json:"description"`
 }
