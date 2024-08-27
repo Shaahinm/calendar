@@ -8,14 +8,15 @@ import (
 )
 
 type Config struct {
-	Port       string
-	DbName     string
-	DbHost     string
-	DbPort     string
-	DbUser     string
-	DbPass     string
-	ServerName string
-	DbType     string
+	Port            string
+	DbName          string
+	DbHost          string
+	DbPort          string
+	DbUser          string
+	DbPass          string
+	ServerName      string
+	DbType          string
+	ResponseVersion int
 }
 
 var Envs = initConfig()
@@ -24,14 +25,15 @@ func initConfig() Config {
 	godotenv.Load()
 
 	return Config{
-		Port:       getEnv("PORT", "8080"),
-		DbName:     getEnv("DB_NAME", "test.db"),
-		DbHost:     getEnv("DB_HOST", "127.0.0.1"),
-		DbPort:     getEnv("DB_PORT", "3306"),
-		DbUser:     getEnv("DB_USER", "root"),
-		DbPass:     getEnv("DB_PASS", "root"),
-		ServerName: getEnv("SERVER_NAME", "127.0.0.1"),
-		DbType:     getEnv("DB_TYPE", "sqlite"),
+		Port:            getEnv("PORT", "8080"),
+		DbName:          getEnv("DB_NAME", "test.db"),
+		DbHost:          getEnv("DB_HOST", "127.0.0.1"),
+		DbPort:          getEnv("DB_PORT", "3306"),
+		DbUser:          getEnv("DB_USER", "root"),
+		DbPass:          getEnv("DB_PASS", "root"),
+		ServerName:      getEnv("SERVER_NAME", "127.0.0.1"),
+		DbType:          getEnv("DB_TYPE", "sqlite"),
+		ResponseVersion: int(getEnvAsInt("RESPONSE_VERSION", 1)),
 	}
 }
 
