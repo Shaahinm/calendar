@@ -26,6 +26,8 @@ https://jmeubank.github.io/tdm-gcc/download/
 
 # opentelemetry
 
+# Dockerfile
+
 go get go.opentelemetry.io/otel
 go get go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc
 go get go.opentelemetry.io/otel/sdk/resource
