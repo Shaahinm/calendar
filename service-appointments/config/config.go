@@ -26,13 +26,13 @@ func initConfig() Config {
 	godotenv.Load()
 
 	return Config{
-		Port:            getEnv("PORT", "8080"),
+		Port:            getEnv("PORT", "8000"),
 		DbName:          getEnv("DB_NAME", "test.db"),
 		DbHost:          getEnv("DB_HOST", "127.0.0.1"),
 		DbPort:          getEnv("DB_PORT", "3306"),
 		DbUser:          getEnv("DB_USER", "root"),
 		DbPass:          getEnv("DB_PASS", "root"),
-		ServerName:      getEnv("SERVER_NAME", "127.0.0.1"),
+		ServerName:      getEnv("SERVER_NAME", "0.0.0.0"),
 		DbType:          getEnv("DB_TYPE", "sqlite"),
 		UserLang:        getEnv("USER_LANG", "en"),
 		ResponseVersion: int(getEnvAsInt("RESPONSE_VERSION", 1)),

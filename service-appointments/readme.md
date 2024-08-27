@@ -1,20 +1,20 @@
 go env -w CGO_ENABLED=1
 go run .\cmd\main.go
 go run .\cmd
+go mod tidy
 
 # tools
+[link](https://github.com/avelino/awesome-go)
 
-https://github.com/avelino/awesome-go
 
-# for sqlite
-
-https://jmeubank.github.io/tdm-gcc/download/
+# Sqlite
+[link](https://jmeubank.github.io/tdm-gcc/download/)
 
 # todo
 
 # db relations
 
-# structured logging
+# structured logging. [^1]
 
 # test
 
@@ -42,9 +42,23 @@ Second, we can validate the request body using the go-playground validator packa
 a sample is added to the todos-controller (POST)
 
 # generic service vs specific service
+```go
 //todoService := service.NewService[models.Todo]()
 todoService := service.NewTodoService()
 //todo := models.Todo{Title: vars["category"], Description: "description"}
 t := todoService.Create(model)
 controllers.Ok(&w, t)
+```
 
+# translation
+```go
+template := map[string]interface{}{
+		"Name": "Shaahin",
+}
+log.Println(lang.GetWithTemplate(keys.Test, template))
+```
+> description
+to change the locate
+
+
+[^1]: Log with structured format and variables
