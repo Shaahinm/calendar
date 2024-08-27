@@ -14,7 +14,7 @@ func Validate[T any](writer *http.ResponseWriter, r *http.Request) (T, error) {
 	w := *writer
 	err := json.NewDecoder(r.Body).Decode(&model)
 	if err != nil {
-		Bad(&w, "Validation error")
+		UnprocessableContent(&w, "Validation error")
 		return defaultValue, err
 	}
 
@@ -22,7 +22,7 @@ func Validate[T any](writer *http.ResponseWriter, r *http.Request) (T, error) {
 	err = validate.Struct(model)
 	if err != nil {
 		errors := err.(validator.ValidationErrors)
-		Bad(&w, fmt.Sprintf("Validation error: %s", errors))
+		UnprocessableContent(&w, fmt.Sprintf("Validation error: %s", errors))
 		return defaultValue, err
 	}
 	return model, nil

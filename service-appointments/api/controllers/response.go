@@ -38,6 +38,27 @@ func Created(writer *http.ResponseWriter, payload any) {
 	jsonResponseWriter.addPayload(payload, http.StatusCreated)
 }
 
+func Accepted(writer *http.ResponseWriter, payload any) {
+	jsonResponseWriter := NewJsonResponseWriter(writer)
+	jsonResponseWriter.addHeader()
+	jsonResponseWriter.addStatus(http.StatusAccepted)
+	jsonResponseWriter.addPayload(payload, http.StatusAccepted)
+}
+
+func UnprocessableContent(writer *http.ResponseWriter, payload any) {
+	jsonResponseWriter := NewJsonResponseWriter(writer)
+	jsonResponseWriter.addHeader()
+	jsonResponseWriter.addStatus(http.StatusUnprocessableEntity)
+	jsonResponseWriter.addPayload(payload, http.StatusUnprocessableEntity)
+}
+
+func Unauthorized(writer *http.ResponseWriter, payload any) {
+	jsonResponseWriter := NewJsonResponseWriter(writer)
+	jsonResponseWriter.addHeader()
+	jsonResponseWriter.addStatus(http.StatusUnauthorized)
+	jsonResponseWriter.addPayload(payload, http.StatusUnauthorized)
+}
+
 func Bad(writer *http.ResponseWriter, payload any) {
 	jsonResponseWriter := NewJsonResponseWriter(writer)
 	jsonResponseWriter.addHeader()
