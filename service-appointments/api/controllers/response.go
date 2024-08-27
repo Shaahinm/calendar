@@ -23,7 +23,6 @@ func NewJsonResponseWriter(writer *http.ResponseWriter) *JsonResponseWriter {
 	}
 }
 
-// TODO: to be read from the env file
 var version = config.Envs.ResponseVersion
 
 func Ok(writer *http.ResponseWriter, payload any) {
