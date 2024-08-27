@@ -6,10 +6,11 @@ import (
 
 	"github.com/Shaahinm/calendar/api"
 	"github.com/Shaahinm/calendar/config"
+	"github.com/Shaahinm/calendar/internal/db"
 )
 
 func main() {
-	//db.Up(false)
+	db.Up(false)
 	//InitOtl()
 	startServer()
 	fmt.Println("Application started")

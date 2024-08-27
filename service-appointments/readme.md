@@ -39,3 +39,10 @@ we can force a parameter to be of a certain type, for example, we can force an i
 Second, we can validate the request body using the go-playground validator package.
 a sample is added to the todos-controller (POST)
 
+# generic service vs specific service
+//todoService := service.NewService[models.Todo]()
+todoService := service.NewTodoService()
+//todo := models.Todo{Title: vars["category"], Description: "description"}
+t := todoService.Create(model)
+controllers.Ok(&w, t)
+

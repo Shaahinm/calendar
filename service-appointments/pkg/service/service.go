@@ -6,11 +6,12 @@ import (
 
 func NewService[T any]() *Service[T] {
 	repository := *repository.NewRepository[T]()
-	return &Service[T]{repository: &repository}
+	return &Service[T]{&repository}
 }
 
 type Service[T any] struct {
-	repository *repository.Repository[T]
+	//repository *repository.Repository[T]
+	*repository.Repository[T]
 }
 
 // func (s *Service[T]) Create(model T) T {
@@ -18,7 +19,3 @@ type Service[T any] struct {
 // 	fmt.Println(t)
 // 	return t
 // }
-
-func (s *Service[T]) Repository() *repository.Repository[T] {
-	return s.repository
-}
