@@ -15,7 +15,7 @@ func HandleGetTodos(w http.ResponseWriter, r *http.Request) {
 	_, span := tracer.Start(r.Context(), "getTodos")
 	defer span.End()
 	println(tracer)
-	//vars := mux.Vars(r)
+	// vars := mux.Vars(r)
 	controllers.Ok(&w, "todos")
 }
 

@@ -3,6 +3,8 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/Shaahinm/calendar/config"
 )
 
 type JsonResponseWriter struct {
@@ -22,7 +24,7 @@ func NewJsonResponseWriter(writer *http.ResponseWriter) *JsonResponseWriter {
 }
 
 // TODO: to be read from the env file
-var version = 1
+var version = config.Envs.ResponseVersion
 
 func Ok(writer *http.ResponseWriter, payload any) {
 	jsonResponseWriter := NewJsonResponseWriter(writer)
