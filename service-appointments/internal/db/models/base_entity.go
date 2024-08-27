@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type BaseModel struct {
+type BaseEntity struct {
 	ID        uint           `gorm:"primarykey" json:"id"`
 	CreatedAt time.Time      `json:"createdAt"`
 	UpdatedAt time.Time      `json:"updatedAt"`

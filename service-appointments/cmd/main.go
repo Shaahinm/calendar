@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db.Up(false)
+	db.Up(true)
 	//InitOtl()
 	startServer()
 	fmt.Println("Application started")

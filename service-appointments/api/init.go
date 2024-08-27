@@ -21,7 +21,7 @@ func NewApiServer(addr string) *ApiServer {
 
 func (s *ApiServer) Start() error {
 	router := mux.NewRouter()
-	routes.RegisterTodoRoutes(router)
+	routes.RegisterRoutes(router)
 	middlewares.RegisterMiddleware(router)
 
 	connection := fmt.Sprintf("%s:%s", config.Envs.ServerName, config.Envs.Port)

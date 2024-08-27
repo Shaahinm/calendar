@@ -12,6 +12,7 @@ import (
 func Up(seed bool) {
 	db := config.DB()
 	db.AutoMigrate(&models.Todo{})
+	db.AutoMigrate(&models.User{})
 
 	if seed {
 		seedData(db)
