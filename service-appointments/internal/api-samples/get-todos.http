@@ -1,0 +1,6 @@
+GET /auth/token HTTP/1.1
+Accept: */*
+User-Agent: *
+Content-Type: application/json
+Host: 0.0.0.0:8000
+Content-Length: 37
