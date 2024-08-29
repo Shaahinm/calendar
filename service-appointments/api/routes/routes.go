@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/Shaahinm/calendar/api/controllers"
 	"github.com/Shaahinm/calendar/api/controllers/todo"
 	"github.com/Shaahinm/calendar/pkg/util"
 
@@ -33,8 +34,7 @@ func RegisterRoutes(r *mux.Router) {
 		t = append(t, Test{1, "hello"})
 		t = append(t, Test{2, "world"})
 
-		result, _ := json.Marshal(&t)
-		w.Write(result)
+		controllers.Ok(&w, t)
 	}).Methods("GET")
 	// guarded routes
 	authRouter := r.PathPrefix("/").Subrouter()
